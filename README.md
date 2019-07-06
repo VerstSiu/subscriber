@@ -1,6 +1,58 @@
 
 # Subscriber
 
+[![](https://jitpack.io/v/VerstSiu/subscriber.svg)](https://jitpack.io/#VerstSiu/subscriber)
+
+## Get Start
+
+* Add it in your root build.gradle at the end of repositories:
+
+    ```gradle
+    allprojects {
+        repositories {
+          ...
+          maven { url 'https://jitpack.io' }
+        }
+    }
+    ```
+
+* Add the dependency:
+
+    ```gradle
+    dependencies {
+        implementation 'com.github.VerstSiu:subscriber:1.0'
+    }
+    ```
+
+## Usage
+
+1. Subscribe/unsubscribe session/node with channel info:
+
+    ```kotlin
+    val subManager = Subscriber<NODE, CHANNEL>(
+      onChannelActive = { channel -> TODO() },
+      onChannelInactive = { channel -> TODO() }
+    )
+
+    subManager.sub(node, channel)
+    subManager.unsub(node, channel)
+    ``` 
+
+2. Get active nodes of channel to send message:
+
+    ```kotlin
+    val nodes = subManager.getActiveNodes(channel)
+
+    nodes.forEach { it.send(message) }
+    ```
+
+3. Release node when session finished:
+
+    ```kotlin
+    // This will clear all related channels of node
+    subManager.release(node)
+    ```
+
 ## License
 
 ```
