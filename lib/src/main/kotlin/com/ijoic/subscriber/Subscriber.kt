@@ -85,6 +85,13 @@ class Subscriber<NODE, CHANNEL>(
   }
 
   /**
+   * Returns active channels of [node]
+   */
+  fun getActiveChannels(node: NODE): Set<CHANNEL>? {
+    return nodeInfoMap[node]
+  }
+
+  /**
    * Returns [channel] active status
    */
   private fun isChannelActive(channel: CHANNEL): Boolean {
